@@ -13,7 +13,6 @@ def get_data():
         return []
     json_data = response.json()
     available_sols = json_data["sol_keys"]
-    print(available_sols)
 
     for sols in available_sols:
         current_sol_data = {}
@@ -38,13 +37,17 @@ def get_data():
             current_sol_data["season"] = None
 
         #print(str(sols), current_sol_data)
-        results = str(sols), current_sol_data
-        #response = requests.delete(BASE + str(sols))
-        #response = requests.put(BASE + str(sols), current_sol_data)
-    return results
+        #results = str(sols), current_sol_data
+        response = requests.delete(BASE + str(sols))
+        response = requests.put(BASE + str(sols), current_sol_data)
+        result = response.status_code
+    return result
 
 def main():
     print(get_data())
+
+if __name__ == '__main__':
+    main()
 
 
 
